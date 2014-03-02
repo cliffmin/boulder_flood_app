@@ -42,12 +42,13 @@ class ShowDinosaur(MethodView):
 
   def get(self, slug):
     dinosaur = Dinosaur.objects.get_or_404(slug=slug)
-    return render_template('dating/show.html', dinosaur=dinosaur)
+  # dinosaur  = Dinosaurs(name="t-rex", height="70m", dinosaur_type="badass", imageURL="http://1.bp.blogspot.com/-u-rpqjoaTI8/UjndjDF44OI/AAAAAAAAA4o/ty_qWLXlCuo/s1600/Dinosaurs_Lasers.jpg)")
+    return render_template('dinosaurs/show.html', dinosaur=dinosaur)
 
 
 
 dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
 dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
-dinosaurs.add_url_rule('/dinosaur/<slug>/', view_func=ShowDinosaur.as_view('show'))
+dinosaurs.add_url_rule('/dinosaurs/<slug>/', view_func=ShowDinosaur.as_view('show'))
 
 
