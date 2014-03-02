@@ -67,6 +67,7 @@ class CreateDinosaur(MethodView):
 
 dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
 dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
+dinosaurs.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
 dinosaurs.add_url_rule('/dinosaur/<slug>/', view_func=ShowDinosaur.as_view('show'))
 
 
