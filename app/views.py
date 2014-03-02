@@ -45,6 +45,25 @@ class ShowDinosaur(MethodView):
     return render_template('dating/show.html', dinosaur=dinosaur)
 
 
+class CreateDinosaur(MethodView):
+
+  def get(self):
+    return render_template('dinosaurs/create.html')
+
+  def post(self):
+
+    if request.method == 'POST':
+      name = request.form['name']
+      dinosaur_type = request.form['type']
+      height = request.form['height']
+      image = request.form['image']
+      slug = slugify(name)
+      dinosaur = Dinosaur(name=name, dinosaur_type=dinosaur_type, height=height, image=image slug=slug)
+      dinosaur.save()
+
+      return render_template('dinosaurs/show.html', dinosaur=dinosaur)
+    return render_template('dinosaurs/create.html')
+
 
 dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
 dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
