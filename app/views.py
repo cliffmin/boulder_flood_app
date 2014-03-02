@@ -58,7 +58,7 @@ class CreateDinosaur(MethodView):
       height = request.form['height']
       image = request.form['image']
       slug = slugify(name)
-      dinosaur = Dinosaur(name=name, dinosaur_type=dinosaur_type, height=height, image=image slug=slug)
+      dinosaur = Dinosaurs(name=name, dinosaur_type=dinosaur_type, height=height, image=image slug=slug)
       dinosaur.save()
 
       return render_template('dinosaurs/show.html', dinosaur=dinosaur)
