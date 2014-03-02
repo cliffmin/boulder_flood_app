@@ -3,9 +3,9 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 
 from flask.ext.mongoengine.wtf import model_form
-from dating.models import *
+from app.models import *
 
-dating = Blueprint('dating', __name__, template_folder='templates')
+dinosaurs = Blueprint('dinosaurs', __name__, template_folder='templates')
 
 class Search(MethodView):
 
@@ -38,16 +38,16 @@ class Home(MethodView):
   def get(self):
     return render_template('dating/home.html')
 
-class ShowArticle(MethodView):
+class ShowDinosaur(MethodView):
 
   def get(self, slug):
-    pet = Pets.objects.get_or_404(slug=slug)
-    return render_template('dating/show.html', pet=pet)
+    dinosaur = Dinosaur.objects.get_or_404(slug=slug)
+    return render_template('dating/show.html', dinosaur=dinosaur)
 
 
 
-dating.add_url_rule('/', view_func=Home.as_view('home'))
-dating.add_url_rule('/search', view_func=Search.as_view('search'))
-dating.add_url_rule('/pet/<slug>/', view_func=ShowArticle.as_view('show'))
+dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
+dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
+dinosaurs.add_url_rule('/dinosaur/<slug>/', view_func=ShowDinosaur.as_view('show'))
 
 
