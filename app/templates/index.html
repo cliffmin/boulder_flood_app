@@ -1,8 +1,0 @@
-{% extends "layout.html" %}
-
-{% block content %}
-    {% for dino in dinosaurs %}
-      <h2><a href="/view/{{ dinosaur.slug }}">{{ dinosaur.name }}</a></h2>
-      <p>{{ dinosaur.type }}</p>
-    {% endfor %}
-{% endblock %}

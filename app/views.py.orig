@@ -12,7 +12,14 @@ class Search(MethodView):
   def get(self):
     name = request.args.get('name', '')
 
-    dinosaur_type = request.args.get('type', '')
+    pet_type = request.args.get('pet_type', '')
+
+
+    count = Pets.objects.count()
+    if request.args.get('n'):
+      count = int(request.args.get('n').encode("utf8")) or Pets.objects.count()
+
+
 
     try:
       pets = Pets.objects.filter(name__contains=name, pet_type__contains=pet_type)
@@ -28,16 +35,13 @@ class Search(MethodView):
 
 class Home(MethodView):
 
-
   def get(self):
-    dinosaurs = Dinosaurs.objects.all()
-    return render_template('dinosaurs/home.html', dinosaurs=dinosaurs)
+    return render_template('dating/home.html')
 
 class ShowDinosaur(MethodView):
 
   def get(self, slug):
-    print slug
-    dinosaur = Dinosaurs.objects.get_or_404(slug=slug)
+    dinosaur = Dinosaur.objects.get_or_404(slug=slug)
   # dinosaur  = Dinosaurs(name="t-rex", height="70m", dinosaur_type="badass", imageURL="http://1.bp.blogspot.com/-u-rpqjoaTI8/UjndjDF44OI/AAAAAAAAA4o/ty_qWLXlCuo/s1600/Dinosaurs_Lasers.jpg)")
     return render_template('dinosaurs/show.html', dinosaur=dinosaur)
 
@@ -64,7 +68,11 @@ class CreateDinosaur(MethodView):
 
 dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
 dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
-dinosaurs.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
+<<<<<<< HEAD
 dinosaurs.add_url_rule('/dinosaurs/<slug>/', view_func=ShowDinosaur.as_view('show'))
+=======
+dinosaurs.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
+dinosaurs.add_url_rule('/dinosaur/<slug>/', view_func=ShowDinosaur.as_view('show'))
+>>>>>>> 096b9683ff703ea0b10b8d139f76d3669fe7ca82
 
 
