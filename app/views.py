@@ -12,14 +12,7 @@ class Search(MethodView):
   def get(self):
     name = request.args.get('name', '')
 
-    pet_type = request.args.get('pet_type', '')
-
-
-    count = Pets.objects.count()
-    if request.args.get('n'):
-      count = int(request.args.get('n').encode("utf8")) or Pets.objects.count()
-
-
+    dinosaur_type = request.args.get('type', '')
 
     try:
       pets = Pets.objects.filter(name__contains=name, pet_type__contains=pet_type)
