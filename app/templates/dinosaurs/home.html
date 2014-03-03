@@ -2,17 +2,15 @@
 {% block content %}
 <header>
    <div class="container">
-      <h1 class="logo">Flask App</h1>
-        <strong><nav>
-       <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('about') }}">About</a></li>
-        </nav></strong>
+      <h1 class="logo">It's DINOSAURS</h1>
    </div>
 
 
 </header>
   <div class="jumbotron">
-    <h2>Welcome to the Flask app<h2>
-    <h3>This is the home page for the Flask app<h3>
+    <h2>CHECK IT OUT<h2>
+         {% for dinosaur in dinosaurs%}
+      <h2><a href="/dinosaurs/{{ dinosaur.slug }}">{{ dinosaur.name}}</a></h2>
+    {% endfor %}
   </div>
 {% endblock %}

@@ -10,6 +10,7 @@ class Dinosaurs(db.Document):
     dinosaur_type = db.StringField(max_length=255, required=False)
     height = db.StringField(max_length=255, required=False)
     imageURL = db.StringField(required=False)
+    slug = db.StringField(required=False)
 
     def __unicode__(self):
         return self.name
