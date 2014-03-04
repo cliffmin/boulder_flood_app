@@ -1,12 +1,8 @@
 {% extends "layout.html"%}
 {% block content%}
 <h2>Show</h2>
-Name: {{dinosaur.name}}
-Height: {{dinosaur.height}}
-Type: {{dinosaur.dinosaur_type}}
-
-Here's a photo
-</br>
-<img src="{{ dinosaur.imageURL }}"></img>
+Name: {{helper.name}}
+Skill: {{helper.skill}}
+Location: {{helper.location}}
 
 {% endblock %}
