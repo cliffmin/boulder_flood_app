@@ -30,8 +30,8 @@ class Home(MethodView):
 
 
   def get(self):
-    helpers = Helpers.objects.all()
-    return render_template('helpers/home.html', helpers = helpers)
+    helpers = Helper.objects.all()
+    return render_template('helpers/home.html', helpers=helpers)
 
 class ShowHelper(MethodView):
 
@@ -45,7 +45,7 @@ class ShowHelper(MethodView):
 class CreateHelper(MethodView):
 
   def get(self):
-    return render_template('dinosaurs/create.html')
+    return render_template('helpers/create.html')
 
   def post(self):
 
@@ -55,16 +55,16 @@ class CreateHelper(MethodView):
       height = request.form['height']
       image = request.form['image']
       slug = slugify(name)
-      dinosaur = Dinosaurs(name=name, dinosaur_type=dinosaur_type, height=height, imageURL=image, slug=slug)
-      dinosaur.save()
+      helper = Helper(name=name, dinosaur_type=dinosaur_type, height=height, imageURL=image, slug=slug)
+      helper.save()
 
-      return render_template('dinosaurs/show.html', dinosaur=dinosaur)
-    return render_template('dinosaurs/create.html')
+      return render_template('helpers/show.html', dinosaur=dinosaur)
+    return render_template('helpers/create.html')
 
 
-dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
-dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
-dinosaurs.add_url_rule('/create', view_func=CreateHelper.as_view('create'))
-dinosaurs.add_url_rule('/helpers/<slug>/', view_func=ShowHelper.as_view('show'))
+helpers.add_url_rule('/', view_func=Home.as_view('home'))
+helpers.add_url_rule('/search', view_func=Search.as_view('search'))
+helpers.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
+helpers.add_url_rule('/helpers/<slug>/', view_func=ShowDinosaur.as_view('show'))
 
 

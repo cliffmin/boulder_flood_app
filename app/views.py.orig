@@ -5,21 +5,14 @@ from flask.views import MethodView
 from flask.ext.mongoengine.wtf import model_form
 from app.models import *
 
-dinosaurs = Blueprint('dinosaurs', __name__, template_folder='templates')
+helpers = Blueprint('helpers', __name__, template_folder='templates')
 
 class Search(MethodView):
 
   def get(self):
     name = request.args.get('name', '')
 
-    pet_type = request.args.get('pet_type', '')
-
-
-    count = Pets.objects.count()
-    if request.args.get('n'):
-      count = int(request.args.get('n').encode("utf8")) or Pets.objects.count()
-
-
+    dinosaur_type = request.args.get('type', '')
 
     try:
       pets = Pets.objects.filter(name__contains=name, pet_type__contains=pet_type)
@@ -35,21 +28,35 @@ class Search(MethodView):
 
 class Home(MethodView):
 
-  def get(self):
-    return render_template('dating/home.html')
 
-class ShowDinosaur(MethodView):
+  def get(self):
+<<<<<<< HEAD
+    helpers = Helpers.objects.all()
+    return render_template('helpers/home.html', helpers = helpers)
+=======
+    helpers = Helper.objects.all()
+    return render_template('helpers/home.html', helpers=helpers)
+>>>>>>> 8f5ef7ba0af042eee027db1d21bec601a602e8b7
+
+class ShowHelper(MethodView):
 
   def get(self, slug):
-    dinosaur = Dinosaur.objects.get_or_404(slug=slug)
+    print slug
+<<<<<<< HEAD
+    helpers = Helpers.objects.get_or_404(slug=slug)
   # dinosaur  = Dinosaurs(name="t-rex", height="70m", dinosaur_type="badass", imageURL="http://1.bp.blogspot.com/-u-rpqjoaTI8/UjndjDF44OI/AAAAAAAAA4o/ty_qWLXlCuo/s1600/Dinosaurs_Lasers.jpg)")
-    return render_template('dinosaurs/show.html', dinosaur=dinosaur)
+    return render_template('helpers/show.html', helpers=helpers)
+=======
+    dinosaur = Helper.objects.get_or_404(slug=slug)
+  # dinosaur  = Helper(name="t-rex", height="70m", dinosaur_type="badass", imageURL="http://1.bp.blogspot.com/-u-rpqjoaTI8/UjndjDF44OI/AAAAAAAAA4o/ty_qWLXlCuo/s1600/Dinosaurs_Lasers.jpg)")
+    return render_template('helpers/show.html', dinosaur=dinosaur)
+>>>>>>> 8f5ef7ba0af042eee027db1d21bec601a602e8b7
 
 
-class CreateDinosaur(MethodView):
+class CreateHelper(MethodView):
 
   def get(self):
-    return render_template('dinosaurs/create.html')
+    return render_template('helpers/create.html')
 
   def post(self):
 
@@ -59,20 +66,23 @@ class CreateDinosaur(MethodView):
       height = request.form['height']
       image = request.form['image']
       slug = slugify(name)
-      dinosaur = Dinosaurs(name=name, dinosaur_type=dinosaur_type, height=height, imageURL=image, slug=slug)
-      dinosaur.save()
+      helper = Helper(name=name, dinosaur_type=dinosaur_type, height=height, imageURL=image, slug=slug)
+      helper.save()
 
-      return render_template('dinosaurs/show.html', dinosaur=dinosaur)
-    return render_template('dinosaurs/create.html')
+      return render_template('helpers/show.html', dinosaur=dinosaur)
+    return render_template('helpers/create.html')
 
 
+<<<<<<< HEAD
 dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
 dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
-<<<<<<< HEAD
-dinosaurs.add_url_rule('/dinosaurs/<slug>/', view_func=ShowDinosaur.as_view('show'))
+dinosaurs.add_url_rule('/create', view_func=CreateHelper.as_view('create'))
+dinosaurs.add_url_rule('/helpers/<slug>/', view_func=ShowHelper.as_view('show'))
 =======
-dinosaurs.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
-dinosaurs.add_url_rule('/dinosaur/<slug>/', view_func=ShowDinosaur.as_view('show'))
->>>>>>> 096b9683ff703ea0b10b8d139f76d3669fe7ca82
+helpers.add_url_rule('/', view_func=Home.as_view('home'))
+helpers.add_url_rule('/search', view_func=Search.as_view('search'))
+helpers.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
+helpers.add_url_rule('/helpers/<slug>/', view_func=ShowDinosaur.as_view('show'))
+>>>>>>> 8f5ef7ba0af042eee027db1d21bec601a602e8b7
 
 
