@@ -10,20 +10,17 @@ helpers = Blueprint('helpers', __name__, template_folder='templates')
 class Search(MethodView):
 
   def get(self):
-    name = request.args.get('name', '')
-
-    dinosaur_type = request.args.get('type', '')
+    skill = request.args.get('skill','')
+    location = request.args.get('location','')
 
     try:
-      pets = Pets.objects.filter(name__contains=name, pet_type__contains=pet_type)
-    except Pets.DoesNotExist:
-      pets = []
+      results = Helper.objects.filter(skill__contains=skill, location__contains=location)
+    except Helper.DoesNotExist:
+      results = []
 
-    form_data = {'name': name,'pet_type':pet_type, 'count':count}
-    if count > 0:
-      return render_template('dating/pets.html', pets=pets[:count], data=form_data )
-    else:
-      return render_template('dating/pets.html', pets=pets, data=form_data )
+    form_data = {'skill':skill, 'location':location }
+    return render_template('helpers/search.html', results=results, data=form_data )
+    
 
 
 class Home(MethodView):
