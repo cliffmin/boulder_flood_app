@@ -5,7 +5,7 @@ from flask.views import MethodView
 from flask.ext.mongoengine.wtf import model_form
 from app.models import *
 
-dinosaurs = Blueprint('dinosaurs', __name__, template_folder='templates')
+helpers = Blueprint('helpers', __name__, template_folder='templates')
 
 class Search(MethodView):
 
@@ -30,19 +30,19 @@ class Home(MethodView):
 
 
   def get(self):
-    dinosaurs = Dinosaurs.objects.all()
-    return render_template('dinosaurs/home.html', dinosaurs=dinosaurs)
+    helpers = Helpers.objects.all()
+    return render_template('helpers/home.html', helpers = helpers)
 
-class ShowDinosaur(MethodView):
+class ShowHelper(MethodView):
 
   def get(self, slug):
     print slug
-    dinosaur = Dinosaurs.objects.get_or_404(slug=slug)
+    helpers = Helpers.objects.get_or_404(slug=slug)
   # dinosaur  = Dinosaurs(name="t-rex", height="70m", dinosaur_type="badass", imageURL="http://1.bp.blogspot.com/-u-rpqjoaTI8/UjndjDF44OI/AAAAAAAAA4o/ty_qWLXlCuo/s1600/Dinosaurs_Lasers.jpg)")
-    return render_template('dinosaurs/show.html', dinosaur=dinosaur)
+    return render_template('helpers/show.html', helpers=helpers)
 
 
-class CreateDinosaur(MethodView):
+class CreateHelper(MethodView):
 
   def get(self):
     return render_template('dinosaurs/create.html')
@@ -64,7 +64,7 @@ class CreateDinosaur(MethodView):
 
 dinosaurs.add_url_rule('/', view_func=Home.as_view('home'))
 dinosaurs.add_url_rule('/search', view_func=Search.as_view('search'))
-dinosaurs.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
-dinosaurs.add_url_rule('/dinosaurs/<slug>/', view_func=ShowDinosaur.as_view('show'))
+dinosaurs.add_url_rule('/create', view_func=CreateHelper.as_view('create'))
+dinosaurs.add_url_rule('/helpers/<slug>/', view_func=ShowHelper.as_view('show'))
 
 
