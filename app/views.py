@@ -51,20 +51,19 @@ class CreateHelper(MethodView):
 
     if request.method == 'POST':
       name = request.form['name']
-      dinosaur_type = request.form['type']
-      height = request.form['height']
-      image = request.form['image']
+      skill = request.form['skill']
+      location = request.form['location']
       slug = slugify(name)
-      helper = Helper(name=name, dinosaur_type=dinosaur_type, height=height, imageURL=image, slug=slug)
+      helper = Helper(name=name, skill=skill, location=location,slug=slug)
       helper.save()
 
-      return render_template('helpers/show.html', dinosaur=dinosaur)
+      return render_template('helpers/show.html', helper=helper)
     return render_template('helpers/create.html')
 
 
 helpers.add_url_rule('/', view_func=Home.as_view('home'))
 helpers.add_url_rule('/search', view_func=Search.as_view('search'))
-helpers.add_url_rule('/create', view_func=CreateDinosaur.as_view('create'))
-helpers.add_url_rule('/helpers/<slug>/', view_func=ShowDinosaur.as_view('show'))
+helpers.add_url_rule('/create', view_func=CreateHelper.as_view('create'))
+helpers.add_url_rule('/helpers/<slug>/', view_func=ShowHelper.as_view('show'))
 
 
