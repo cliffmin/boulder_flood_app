@@ -1,8 +1,0 @@
-{% extends "layout.html" %}
-
-{% block content %}
-    {% for dino in helpers %}
-      <h2><a href="/view/{{ dinosaur.slug }}">{{ dinosaur.name }}</a></h2>
-      <p>{{ dinosaur.type }}</p>
-    {% endfor %}
-{% endblock %}
