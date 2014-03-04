@@ -8,7 +8,6 @@ class Helper(db.Document):
 
     name = db.StringField(max_length=255, required=True, unique=True)
     skill = db.StringField(max_length=255, required=True)
-    availability = db.DateTimeField(required=False)
     location = db.StringField(required=True)
     slug = db.StringField(required=False)
 
