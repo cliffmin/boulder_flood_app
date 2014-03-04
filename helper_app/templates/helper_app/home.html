@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<header>
+   <div class="container">
+      <h1 class="logo">It's helpers</h1>
+      <h4><a href="/create">create your own dino</a></h4>
+   </div>
+
+
+</header>
+  <div class="jumbotron">
+    <h2>CHECK IT OUT<h2>
+         {% for dinosaur in helpers%}
+      <h2><a href="/helpers/{{ dinosaur.slug }}">{{ dinosaur.name}}</a></h2>
+    {% endfor %}
+  </div>
+{% endblock %}
