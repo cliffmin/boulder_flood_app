@@ -37,9 +37,8 @@ class ShowHelper(MethodView):
 
   def get(self, slug):
     print slug
-    helpers = Helpers.objects.get_or_404(slug=slug)
-  # dinosaur  = Dinosaurs(name="t-rex", height="70m", dinosaur_type="badass", imageURL="http://1.bp.blogspot.com/-u-rpqjoaTI8/UjndjDF44OI/AAAAAAAAA4o/ty_qWLXlCuo/s1600/Dinosaurs_Lasers.jpg)")
-    return render_template('helpers/show.html', helpers=helpers)
+    helper = Helper.objects.get_or_404(slug=slug)
+    return render_template('helpers/show.html', helper=helper)
 
 
 class CreateHelper(MethodView):

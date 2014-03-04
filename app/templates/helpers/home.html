@@ -3,15 +3,19 @@
 <header>
    <div class="container">
       <h1 class="logo">Boulder Resource</h1>
-      <h4><a href="/create">Volunteer here!</a></h4>
    </div>
+   <nav class="navbar navbar-inverse" role="navigation">
 
 
+  <h4><a href="/create">Volunteer here!</a></h4>
+      <h4><a href="/search">Search for help here!</h4>
+
+   </nav>
 </header>
   <div class="jumbotron">
     <h2>People who have signed up<h2>
          {% for helper in helpers %}
-      <h2><a href="/helper/{{ helper.slug }}">{{ helper.name}}</a></h2>
+      <h2><a href="/helpers/{{ helper.slug }}">{{ helper.name}}</a></h2>
     {% endfor %}
   </div>
 {% endblock %}
